@@ -6,18 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
 const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
-const auth_module_1 = require("./auth/auth.module");
-const local_strategy_1 = require("./auth/local.strategy");
-let AppModule = exports.AppModule = class AppModule {
+const mongoose_1 = require("@nestjs/mongoose");
+const auth_service_1 = require("./auth.service");
+const auth_controller_1 = require("./auth.controller");
+const local_strategy_1 = require("./local.strategy");
+const user_schema_1 = require("../user/user.schema");
+let AuthModule = exports.AuthModule = class AuthModule {
 };
-exports.AppModule = AppModule = __decorate([
+exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
             passport_1.PassportModule,
@@ -25,10 +25,11 @@ exports.AppModule = AppModule = __decorate([
                 secret: '1234',
                 signOptions: { expiresIn: '1h' },
             }),
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://Dollars:currency@cluster0.vy8opj6.mongodb.net/', auth_module_1.AuthModule)
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://Dollars:currency@cluster0.vy8opj6.mongodb.net/'),
+            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, local_strategy_1.LocalStrategy],
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy],
+        controllers: [auth_controller_1.AuthController],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], AuthModule);
+//# sourceMappingURL=auth.module.js.map
