@@ -25,11 +25,12 @@ exports.AuthModule = AuthModule = __decorate([
                 secret: '1234',
                 signOptions: { expiresIn: '1h' },
             }),
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://Dollars:currency@cluster0.vy8opj6.mongodb.net/'),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017'),
             mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
         ],
-        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy],
         controllers: [auth_controller_1.AuthController],
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy],
+        exports: [auth_service_1.AuthService],
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

@@ -1,3 +1,6 @@
+import { Model } from 'mongoose';
+import { UserDocument } from './user/user.schema';
 export declare class AppService {
-    getHello(): string;
+    private demoModel;
+    constructor(demoModel: Model<UserDocument>);
 }

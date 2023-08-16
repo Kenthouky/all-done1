@@ -9,15 +9,16 @@ import { UserSchema } from '../user/user.schema';
 
 @Module({
   imports: [
-  PassportModule,
-  JwtModule.register({
-    secret: '1234',
-    signOptions: { expiresIn: '1h' },
+    PassportModule,
+    JwtModule.register({
+      secret: '1234',
+      signOptions: { expiresIn: '1h' },
   }),
-  MongooseModule.forRoot('mongodb+srv://Dollars:currency@cluster0.vy8opj6.mongodb.net/'),
-  MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forRoot('mongodb://localhost:27017'),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
-  providers: [AuthService, LocalStrategy],
   controllers: [AuthController],
+  providers: [AuthService, LocalStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}

@@ -22,14 +22,15 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { Document, Model } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 export declare class User extends Document {
     username: string;
     password: string;
 }
-export declare const UserSchema: import("mongoose").Schema<User, Model<User, any, any, any, Document<unknown, any, User> & User & {
+export declare const UserSchema: MongooseSchema<User, import("mongoose").Model<User, any, any, any, Document<unknown, any, User> & User & {
     _id: import("mongoose").Types.ObjectId;
 }, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, User, Document<unknown, {}, User> & User & {
     _id: import("mongoose").Types.ObjectId;
 }>;
-export type UserModel = Model<User>;
+export type UserDocument = User & Document;
+export declare const UserModel: any;
